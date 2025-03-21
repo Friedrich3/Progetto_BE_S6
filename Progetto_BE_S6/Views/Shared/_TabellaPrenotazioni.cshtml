@@ -33,8 +33,8 @@
                     {
                                 <div>
                                 <a class="btn btn-outline-success fw-bold" asp-action="CheckIn" asp-controller="Prenotazione" asp-route-prenotazioneId="@item.PrenotazioneId" onclick="return confirm('Sei sicuro di voler eseguire il checkin?');">CheckIn</a>
-                                    <button class="btn btn-warning fw-bold" onclick="showEditModal('@item.PrenotazioneId')">Edit</button>
-                                <a class="btn btn-outline-info fw-bold" asp-action="CheckOut" asp-controller="Prenotazione" asp-route-prenotazioneId="@item.PrenotazioneId" onclick="return confirm('Sei sicuro di voler eseguire il checkout?');">CheckOut</a>
+                                    @* <button class="btn btn-warning fw-bold" >Edit</button> *@
+                                <a class="btn btn-outline-danger fw-bold" asp-action="CheckOut" asp-controller="Prenotazione" asp-route-prenotazioneId="@item.PrenotazioneId" onclick="return confirm('Sei sicuro di voler eseguire il checkout?');">CheckOut</a>
                                 </div>
                     }
                 </td>
