@@ -9,6 +9,17 @@
 	<div class="row">
 		<h2>Form di Registrazione</h2>
 	</div>
+
+	@if (TempData["Error"] != null)
+	{
+
+		<div class="row">
+			<div class="alert alert-danger" role="alert">
+				@TempData["Error"]
+			</div>
+		</div>
+	}
+
 	<div class="row">
 		<form method="post" asp-controller="Prenotazione" asp-action="AddPrenotazione">
 		<h3 class="mb-3">Anagrafica Cliente</h3>

@@ -121,8 +121,10 @@ namespace Progetto_BE_S6.Services
         
         public async Task<bool>CheckOut(Guid id)
         {
-            var prenotazione = _context.Prenotazioni.FirstOrDefault(p => p.PrenotazioneId == id);
+            var prenotazione = await  _context.Prenotazioni.FirstOrDefaultAsync(p => p.PrenotazioneId == id);
             prenotazione.Stato = "checkedout";
+            var camera = await _context.Camere.FirstOrDefaultAsync(p => p.CameraId == prenotazione.CameraId);
+            camera.IsDisponibile = true;
             return await SaveAsync();
         }
         public async Task<bool> CheckIn(Guid id)
