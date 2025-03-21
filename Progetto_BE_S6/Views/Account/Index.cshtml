@@ -5,13 +5,15 @@
 
 
 <div class="container">
-	<div class="row">
+	<div class="row mb-2">
 		<h2>Benvenuto @User.FindFirst(ClaimTypes.GivenName).Value</h2>
 	</div>
+
+	<div class=" row mb-2">
 	@if (User.IsInRole("Admin"))
 	{
 		<div class="row">
-			<div class="card">
+			<div class="card p-0">
 				<div class="card-header">
 					Admin Privilege-only
 				</div>
@@ -21,15 +23,34 @@
 					<a asp-action="Register" asp-controller="Account" class="btn btn-primary">Vai alla Registrazione</a>
 				</div>
 			</div>
-
 		</div>
 	}
+	</div>
 
-	<div class=" row">
+	<div class=" row mb-2">
+		@if (User.IsInRole("Admin"))
+		{
+			<div class="row">
+				<div class="card p-0">
+					<div class="card-header">
+						Admin Privilege-only
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Gestione Camere</h5>
+						<p class="card-text">in questa sezione potrai creare ed aggiungere le nuove camere disponibi nel tuo hotel</p>
+						<a asp-action="Index" asp-controller="Camera" class="btn btn-primary">Vai alle Camere</a>
+					</div>
+				</div>
+
+			</div>
+		}
+	</div>
+
+	<div class=" row mb-2">
 		@if (User.IsInRole("Supervisor") || User.IsInRole("Admin"))
 		{
 			<div class="row">
-				<div class="card">
+				<div class="card p-0">
 					<div class="card-header">
 						SuperVisor Privilege-only
 					</div>
@@ -43,11 +64,11 @@
 			</div>
 		}
 	</div>
-	<div class="row">
+	<div class="row mb-2">
 		@if (User.Identity.IsAuthenticated)
 		{
 			<div class="row">
-				<div class="card">
+				<div class="card p-0">
 					<div class="card-header">
 						Vista prenotazioni
 					</div>

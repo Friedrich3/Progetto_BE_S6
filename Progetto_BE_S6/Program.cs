@@ -55,6 +55,7 @@ builder.Services.AddScoped<RoleManager<ApplicationRole>>();
 
 builder.Services.AddScoped<PrenotazioneServices>();
 builder.Services.AddScoped<HomeServices>();
+builder.Services.AddScoped<CameraServices>();
 builder.Services.AddScoped<EmailServices>();
 
 

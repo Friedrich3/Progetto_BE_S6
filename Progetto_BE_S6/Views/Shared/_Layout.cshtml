@@ -27,6 +27,11 @@
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Prenotazione" asp-action="Index">Gestisci Prenotazioni</a>
                             </li>
+                            @if(User.IsInRole("Admin")){
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Camera" asp-action="Index">Gestisci Camere</a>
+                                </li>
+                            }
 							<li class="nav-item ms-auto d-flex">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Profilo</a>
 								<a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
