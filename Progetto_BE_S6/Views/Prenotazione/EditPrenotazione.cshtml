@@ -1,0 +1,92 @@
+﻿@model EditPrenotazioneViewModel
+@{
+	ViewData["Title"] = "Modifica Prenotazione";
+	var ListaCamere = ViewBag.Camere as List<Camera>;
+	var CurrentCamera = ViewBag.CurrentCamera as Camera;
+}
+
+
+<div class="container">
+	<div class="row">
+		<h2>Form di Modifica Prenotazione</h2>
+	</div>
+
+	@if (TempData["Error"] != null)
+	{
+		<div class="row">
+			<div class="alert alert-danger" role="alert">
+				@TempData["Error"]
+			</div>
+		</div>
+	}
+
+	<div class="row">
+		<form method="post" asp-controller="Prenotazione" asp-action="EditSavePrenotazione" asp-route-prenotazioneId="@Model.PrenotazioneId">
+			<h3 class="mb-3">Anagrafica Cliente</h3>
+			<fieldset class="mb-3">
+				<legend class="fw-bold">Anagrafica</legend>
+				<div class="col-12 row">
+					<div class="col-6">
+
+						<label for="Nome" class="form-label fw-bold text-secondary">Nome</label>
+						<input type="text" class="form-control" id="Nome" placeholder="inserisci il nome..." asp-for="@Model.Nome" required>
+					</div>
+					<div class="col-6">
+
+						<label for="Cognome" class="form-label fw-bold text-secondary">Cognome</label>
+						<input type="text" class="form-control" id="Cognome" placeholder="inserisci il cognome..." asp-for="@Model.Cognome" required>
+					</div>
+				</div>
+				<div class="col-12">
+					<label for="Email" class="form-label fw-bold text-secondary">Email</label>
+					<input type="email" class="form-control" id="Email" placeholder="inserisci l'Email..." asp-for="@Model.Email" required>
+				</div>
+				<div class="col-12">
+					<label for="Telefono" class="form-label fw-bold text-secondary">Telefono</label>
+					<input type="number" class="form-control" id="Telefono" placeholder="inserisci il numero di telefono..." asp-for="@Model.Telefono" required>
+				</div>
+
+			</fieldset>
+			<h3>Informazioni Prenotazione</h3>
+			<fieldset class="mb-5">
+				<legend class="fw-bold">Prenotazione</legend>
+				<div class="col-md-8 pt-2">
+					<label for="ruoli" class="form-label fw-bold text-secondary">Camere Disponibili</label>
+					<select class="form-select" id="Camere" asp-for="@Model.CameraId" required>
+						@if (CurrentCamera!= null){
+
+						<option value="@CurrentCamera.CameraId" selected>
+								ATTUALE - <span class="fw-bold">@CurrentCamera.Numero</span> - <span>@CurrentCamera.Tipo</span> - <span>@CurrentCamera.Prezzo €</span>
+						</option >
+						}
+						@if (ListaCamere != null)
+						{
+							foreach (var camera in ListaCamere)
+							{
+								<option value="@camera.CameraId">
+									<span class="fw-bold">@camera.Numero</span> - <span>@camera.Tipo</span> - <span>@camera.Prezzo €</span>
+								</option>
+							}
+						}
+
+					</select>
+				</div>
+				<div class="col-md-12 row pt-3">
+					<div class="mb-3 col-6">
+						<label for="Datainizio" class="form-label fw-bold text-secondary">Data di inizio soggiorno</label>
+						<input asp-for="@Model.DataInizio" class="form-control" id="Datainizio" type="date" required />
+					</div>
+					<div class="mb-3 col-6">
+						<label for="DataFine" class="form-label fw-bold text-secondary">Data di fine soggiorno</label>
+						<input asp-for="@Model.DataFine" class="form-control" id="DataFine" type="date" required />
+					</div>
+				</div>
+			</fieldset>
+			<div class="d-flex justify-content-around">
+				<button type="submit" class="btn btn-warning">Modifica Prenotazione</button>
+				<button type="reset" class="btn btn-outline-secondary">Reset Form</button>
+			</div>
+		</form>
+	</div>
+</div>
+

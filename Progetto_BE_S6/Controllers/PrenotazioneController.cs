@@ -51,6 +51,15 @@ namespace Progetto_BE_S6.Controllers
         }
 
         [Authorize(Roles = "Admin, Supervisor")]
+        public async Task<IActionResult> CheckIn(Guid prenotazioneId)
+        {
+            var result = await _prenotazioneServices.CheckIn(prenotazioneId);
+
+
+            return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "Admin, Supervisor")]
         public async Task<IActionResult> CheckOut(Guid prenotazioneId)
         {
             var result = await _prenotazioneServices.CheckOut(prenotazioneId);
@@ -60,10 +69,32 @@ namespace Progetto_BE_S6.Controllers
         }
 
         [Authorize(Roles = "Admin, Supervisor")]
-        public async Task<IActionResult> CheckIn(Guid prenotazioneId)
+        public async Task<IActionResult> EditPrenotazione(Guid prenotazioneId)
         {
-            var result = await _prenotazioneServices.CheckIn(prenotazioneId);
-
+            ViewBag.Camere = await _prenotazioneServices.getCamere();
+            ViewBag.CurrentCamera = await _prenotazioneServices.CurrentCamera(prenotazioneId);
+            var prenotazione = await _prenotazioneServices.GetPrenotazione(prenotazioneId);
+            if (prenotazione == null) 
+            {
+                TempData["Error"] = "Errore nel recupero della prenotazione";
+                return RedirectToAction("Index");
+            }
+            return View(prenotazione);
+        }
+        [Authorize(Roles = "Admin, Supervisor")]
+        [HttpPost]
+        public async Task<IActionResult> EditSavePrenotazione(EditPrenotazioneViewModel editPrenotazioneViewModel, Guid prenotazioneId)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Form di compilazione errato!";
+                return RedirectToAction("EditPrenotazione",prenotazioneId);
+            }
+            var isEdited = await _prenotazioneServices.EditSave(editPrenotazioneViewModel, prenotazioneId, User);
+            if (!isEdited)
+            {
+                TempData["Error"] = "Errore nella modifica della prenotazione";
+            }
 
             return RedirectToAction("Index");
         }
@@ -75,5 +106,5 @@ namespace Progetto_BE_S6.Controllers
 
 
 
-    }
+        }
 }

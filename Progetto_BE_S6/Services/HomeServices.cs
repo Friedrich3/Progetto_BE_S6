@@ -16,7 +16,7 @@ namespace Progetto_BE_S6.Services
         public async Task<List<Camera>> getCamere()
         {
             var Lista = new List<Camera>();
-            Lista = await _context.Camere.Where(p=> p.IsDisponibile==true).ToListAsync();
+            Lista = await _context.Camere.Where(p=> p.IsDisponibile==true).OrderBy(n=> n.Numero).ToListAsync();
             return Lista;
         }
 
