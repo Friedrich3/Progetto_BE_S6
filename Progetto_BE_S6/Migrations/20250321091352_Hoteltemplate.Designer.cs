@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Progetto_BE_S6.Data;
 
@@ -11,9 +12,11 @@ using Progetto_BE_S6.Data;
 namespace Progetto_BE_S6.Migrations
 {
     [DbContext(typeof(ProgettoBES6))]
-    partial class ProgettoBES6ModelSnapshot : ModelSnapshot
+    [Migration("20250321091352_Hoteltemplate")]
+    partial class Hoteltemplate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
