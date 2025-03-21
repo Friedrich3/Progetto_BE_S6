@@ -1,8 +1,47 @@
-﻿@{
+﻿@model List<Camera>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to EpiHotel</h1>
-    
+
+
+<div class="container">
+	<div class="text-center">
+		<h1 class="display-4">Welcome to EpiHotel</h1>
+
+	</div>
+	<div class="row">
+			<h3>Le nostre camere disponibili:</h3>
+
+	</div>
+	<div class="row">
+		@if (Model != null && Model.Count > 0){
+			foreach(var camera in Model)
+			{
+				<div class="col-3 mb-2">
+					<div class="card">
+						<div class="card-body d-flex justify-content-between">
+							<div>
+							<h3 class="card-title fw-bold">@camera.Numero</h3>
+
+							</div>
+							<div class="text-end">
+							<h5 class="card-subtitle mb-2 fw-bold text-body-secondary">@camera.Tipo</h5>
+							<h5 class="card-text">@camera.Prezzo €</h5>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+
+			
+		}else{
+			<div class="alert alert-info" role="alert">
+				Non ci sono camere disponibi al momento.
+			</div>
+		}
+	</div>
 </div>
+

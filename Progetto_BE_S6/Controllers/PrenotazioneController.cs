@@ -16,15 +16,15 @@ namespace Progetto_BE_S6.Controllers
         }
 
 
-        public  IActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
-        [HttpGet("Prenotazione/GetAll")]
+        [HttpGet("/Getall")]
         public async Task<IActionResult> GetAll()
         {
             List<Prenotazione> Lista = await _prenotazioneServices.GetAllPrenotazioni();
-            return PartialView("_TabellaPrenotazioni", Lista);
+            return  PartialView("_TabellaPrenotazioni", Lista);
         }
 
         [Authorize(Roles = "Admin, Supervisor")]
@@ -47,13 +47,29 @@ namespace Progetto_BE_S6.Controllers
             //var cliente = await _prenotazioneServices.GetClient(prenotazioneViewModel.Cliente.Email);
 
             var result = await _prenotazioneServices.CreateNew(prenotazioneViewModel, User);
-               
+            return RedirectToAction("Index");
+        }
 
+        [Authorize(Roles = "Admin, Supervisor")]
+        public async Task<IActionResult> CheckOut(Guid prenotazioneId)
+        {
+            var result = await _prenotazioneServices.CheckOut(prenotazioneId);
 
 
             return RedirectToAction("Index");
         }
-        
+
+        [Authorize(Roles = "Admin, Supervisor")]
+        public async Task<IActionResult> CheckIn(Guid prenotazioneId)
+        {
+            var result = await _prenotazioneServices.CheckIn(prenotazioneId);
+
+
+            return RedirectToAction("Index");
+        }
+
+
+
 
 
 

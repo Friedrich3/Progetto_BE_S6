@@ -32,16 +32,15 @@ namespace Progetto_BE_S6.Controllers
             return View();
         }
 
-        //[Authorize(Roles ="Admin")]
-        [AllowAnonymous]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Register()
         {
             ViewBag.Ruoli = await _roleManager.Roles.ToListAsync();
             return View();
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        [AllowAnonymous]
+        
         public async Task<IActionResult> Register(RegisterDipendenteViewModel dipendentViewModel)
         {
             if (!ModelState.IsValid) 
@@ -77,7 +76,15 @@ namespace Progetto_BE_S6.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+
             return View();
+            }
         }
 
         [HttpPost]
@@ -128,7 +135,7 @@ namespace Progetto_BE_S6.Controllers
             await _signInManager.SignOutAsync();
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
 
         [AllowAnonymous]

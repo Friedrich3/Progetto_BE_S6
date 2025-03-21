@@ -12,6 +12,7 @@
                 <th>Cliente</th>
                 <th>Data Check-In</th>
                 <th>Data Check-Out</th>
+                <th>Stato</th>
                 <th>Created by</th>
                 <th>Actions</th>
         </tr>
@@ -25,13 +26,15 @@
                 <td>@item.Cliente.Email</td>
                 <td>@item.DataInizio</td>
                 <td>@item.DataFine</td>
+                <td>@item.Stato</td>
                 <td>@item.CreatedBy</td>
                 <td>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Supervisor"))
                     {
                                 <div>
+                                <a class="btn btn-outline-success fw-bold" asp-action="CheckIn" asp-controller="Prenotazione" asp-route-prenotazioneId="@item.PrenotazioneId" onclick="return confirm('Sei sicuro di voler eseguire il checkin?');">CheckIn</a>
                                     <button class="btn btn-warning fw-bold" onclick="showEditModal('@item.PrenotazioneId')">Edit</button>
-                                    <button class="btn btn-danger fw-bold" onclick="showDeleteModal('@item.PrenotazioneId')">Delete</button>
+                                <a class="btn btn-outline-info fw-bold" asp-action="CheckOut" asp-controller="Prenotazione" asp-route-prenotazioneId="@item.PrenotazioneId" onclick="return confirm('Sei sicuro di voler eseguire il checkout?');">CheckOut</a>
                                 </div>
                     }
                 </td>

@@ -19,7 +19,7 @@ namespace Progetto_BE_S6.Models
         [DataType(DataType.Date)]
         public DateTime DataFine { get; set; }
         [Required]
-        [AllowedValues("pending", "confirmed", "instay", "checkedout")]
+        [AllowedValues("confirmed","checkedin", "instay", "checkedout")]
         public string Stato { get; set; }
         [Required]
         public string CreatedBy { get; set; }

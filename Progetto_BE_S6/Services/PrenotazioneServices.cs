@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Progetto_BE_S6.Data;
 using Progetto_BE_S6.Models;
@@ -42,7 +43,7 @@ namespace Progetto_BE_S6.Services
         {
             var Lista = new List<Prenotazione>();
 
-            Lista = await _context.Prenotazioni.Include(c => c.Camera).Include(c => c.Cliente).Where(p => p.Camera.IsDisponibile == false).ToListAsync();
+            Lista = await _context.Prenotazioni.Include(c => c.Camera).Include(c => c.Cliente).Where(p => p.Camera.IsDisponibile == false && p.Stato!= "checkedout").ToListAsync();
 
             return Lista;
         }
@@ -115,8 +116,20 @@ namespace Progetto_BE_S6.Services
                 cameraSelected.IsDisponibile = false;
                 return await SaveAsync();
             }
+        }
 
-            
+        
+        public async Task<bool>CheckOut(Guid id)
+        {
+            var prenotazione = _context.Prenotazioni.FirstOrDefault(p => p.PrenotazioneId == id);
+            prenotazione.Stato = "checkedout";
+            return await SaveAsync();
+        }
+        public async Task<bool> CheckIn(Guid id)
+        {
+            var prenotazione = _context.Prenotazioni.FirstOrDefault(p => p.PrenotazioneId == id);
+            prenotazione.Stato = "checkedin";
+            return await SaveAsync();
         }
 
     }

@@ -1,21 +1,27 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Progetto_BE_S6.Services;
 using Progetto_BE_S6.ViewModel;
 
 namespace Progetto_BE_S6.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly HomeServices _homeServices;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger , HomeServices homeServices)
         {
             _logger = logger;
+            _homeServices = homeServices;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Lista = await _homeServices.getCamere();
+            return View(Lista);
         }
 
         public IActionResult Privacy()

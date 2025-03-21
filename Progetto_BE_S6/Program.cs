@@ -54,6 +54,7 @@ builder.Services.AddScoped<SignInManager<ApplicationUser>>();
 builder.Services.AddScoped<RoleManager<ApplicationRole>>();
 
 builder.Services.AddScoped<PrenotazioneServices>();
+builder.Services.AddScoped<HomeServices>();
 builder.Services.AddScoped<EmailServices>();
 
 
@@ -81,6 +82,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
