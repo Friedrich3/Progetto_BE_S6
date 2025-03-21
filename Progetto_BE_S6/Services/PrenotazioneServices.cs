@@ -1,4 +1,5 @@
 ﻿using Progetto_BE_S6.Data;
+using Progetto_BE_S6.Models;
 
 namespace Progetto_BE_S6.Services
 {
@@ -10,6 +11,15 @@ namespace Progetto_BE_S6.Services
             _context = context;
         }
 
+
+        public async Task<List<Camera>> getCamere()
+        {
+            var ListaCamere = new List<Camera>();
+
+            //ListaCamere = await _context.
+
+            return ListaCamere;
+        }
 
     }
 }

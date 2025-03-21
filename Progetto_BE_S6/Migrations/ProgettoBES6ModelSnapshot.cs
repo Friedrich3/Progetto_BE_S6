@@ -151,7 +151,7 @@ namespace Progetto_BE_S6.Migrations
                         {
                             Id = "EB589A41-5B71-41E7-A754-81764E7CCA23",
                             ConcurrencyStamp = "EB589A41-5B71-41E7-A754-81764E7CCA23",
-                            Name = "SuperVisor",
+                            Name = "Supervisor",
                             NormalizedName = "SUPERVISOR"
                         },
                         new
@@ -282,12 +282,12 @@ namespace Progetto_BE_S6.Migrations
 
                     b.HasKey("CameraId");
 
-                    b.ToTable("Camera");
+                    b.ToTable("Camere");
 
                     b.HasData(
                         new
                         {
-                            CameraId = new Guid("73054329-4d2c-485a-9fb3-38924288d4e3"),
+                            CameraId = new Guid("228b555e-eefe-4133-8650-0fcba06cd0af"),
                             IsDisponibile = true,
                             Numero = "101",
                             Prezzo = 70.00m,
@@ -295,7 +295,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("861085c0-84f4-4d25-b6c8-4deb85b7876a"),
+                            CameraId = new Guid("2a8b7bc6-ecfa-4a9b-b19a-6c0fa4760211"),
                             IsDisponibile = true,
                             Numero = "102",
                             Prezzo = 90.00m,
@@ -303,7 +303,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("c419c24c-3aed-4418-8c4a-9c9b9a5df549"),
+                            CameraId = new Guid("08539e4a-cba7-4bf0-9491-bc6e4faeca7d"),
                             IsDisponibile = true,
                             Numero = "103",
                             Prezzo = 110.00m,
@@ -311,7 +311,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("e68e57bc-e586-4d0c-a086-db754f35866f"),
+                            CameraId = new Guid("59e5ae23-7b1e-4a84-856e-1e4089b39c5c"),
                             IsDisponibile = true,
                             Numero = "104",
                             Prezzo = 150.00m,
@@ -319,7 +319,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("4c7a6e1a-bf7c-47b0-adad-fd6b745aacac"),
+                            CameraId = new Guid("b8505eb9-ec33-4a8f-a988-ad001779d748"),
                             IsDisponibile = true,
                             Numero = "105",
                             Prezzo = 70.00m,
@@ -327,7 +327,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("37241cf4-f846-46fc-bcd0-87176f5f03b5"),
+                            CameraId = new Guid("aceb24f8-6d8f-4a0f-a705-fe908fa28996"),
                             IsDisponibile = true,
                             Numero = "106",
                             Prezzo = 90.00m,
@@ -335,7 +335,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("e7e360d5-9e00-4d0c-aa08-1f9cc8b49c48"),
+                            CameraId = new Guid("c3a9241b-87b3-4e13-a7bc-b47c8412b888"),
                             IsDisponibile = true,
                             Numero = "107",
                             Prezzo = 110.00m,
@@ -343,7 +343,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("8d23b43a-d9ad-46c6-95ba-a13cfc19bb75"),
+                            CameraId = new Guid("cd32c9d3-411c-4d46-84f7-186fc20bb025"),
                             IsDisponibile = true,
                             Numero = "108",
                             Prezzo = 150.00m,
@@ -351,7 +351,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("7aa8a66e-ae03-43bc-9511-3f78c54a8355"),
+                            CameraId = new Guid("8787bdaa-06f9-4384-a0e5-29330dc94b71"),
                             IsDisponibile = true,
                             Numero = "109",
                             Prezzo = 70.00m,
@@ -359,7 +359,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("b015eb82-0a5b-4f2d-919a-3bba9399ef78"),
+                            CameraId = new Guid("461448da-0c92-42b1-a289-808168099120"),
                             IsDisponibile = true,
                             Numero = "110",
                             Prezzo = 90.00m,
@@ -367,7 +367,7 @@ namespace Progetto_BE_S6.Migrations
                         },
                         new
                         {
-                            CameraId = new Guid("dd5b9e01-19a8-465d-8f7d-6768a33699c2"),
+                            CameraId = new Guid("f675b115-0636-4b63-9c84-83c8637ac40a"),
                             IsDisponibile = true,
                             Numero = "111",
                             Prezzo = 110.00m,
@@ -400,7 +400,7 @@ namespace Progetto_BE_S6.Migrations
 
                     b.HasKey("ClienteId");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Clienti");
                 });
 
             modelBuilder.Entity("Progetto_BE_S6.Models.Prenotazione", b =>
@@ -435,7 +435,7 @@ namespace Progetto_BE_S6.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Prenotazione");
+                    b.ToTable("Prenotazioni");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

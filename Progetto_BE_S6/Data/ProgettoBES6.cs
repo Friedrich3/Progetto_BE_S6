@@ -13,6 +13,11 @@ namespace Progetto_BE_S6.Data
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
 
+        public DbSet<Camera> Camere {  get; set; }
+        public DbSet<Cliente> Clienti {  get; set; }
+        public DbSet<Prenotazione> Prenotazioni {  get; set; }
+      
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +28,7 @@ namespace Progetto_BE_S6.Data
             modelBuilder.Entity<ApplicationUserRole>().Property(p => p.Date).HasDefaultValueSql("GETDATE()").IsRequired(true);
 
             modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole() { Id = "E47D581A-E477-40DA-AC5D-276F07F59142", Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = "E47D581A-E477-40DA-AC5D-276F07F59142" });
-            modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole() { Id = "EB589A41-5B71-41E7-A754-81764E7CCA23", Name = "SuperVisor", NormalizedName = "SUPERVISOR", ConcurrencyStamp = "EB589A41-5B71-41E7-A754-81764E7CCA23" });
+            modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole() { Id = "EB589A41-5B71-41E7-A754-81764E7CCA23", Name = "Supervisor", NormalizedName = "SUPERVISOR", ConcurrencyStamp = "EB589A41-5B71-41E7-A754-81764E7CCA23" });
             modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole() { Id = "DB5AE2D5-1966-4885-82BF-05FB79EEDDF5", Name = "Dipendente", NormalizedName = "DIPENDENTE", ConcurrencyStamp = "DB5AE2D5-1966-4885-82BF-05FB79EEDDF5" });
 
             modelBuilder.Entity<Prenotazione>().HasOne(cl=> cl.Cliente).WithMany(p=> p.Prenotazione).HasForeignKey(fk=> fk.ClienteId);
@@ -43,6 +48,8 @@ namespace Progetto_BE_S6.Data
                 new Camera { CameraId = Guid.NewGuid(), Numero = "110", Tipo = "Doppia", Prezzo = 90.00m, IsDisponibile = true },
                 new Camera { CameraId = Guid.NewGuid(), Numero = "111", Tipo = "Tripla", Prezzo = 110.00m, IsDisponibile = true }
                 );
+            
+            
 
         }
     }

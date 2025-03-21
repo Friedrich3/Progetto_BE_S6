@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Progetto_BE_S6.Migrations
 {
     /// <inheritdoc />
@@ -51,6 +53,36 @@ namespace Progetto_BE_S6.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Camere",
+                columns: table => new
+                {
+                    CameraId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Prezzo = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    IsDisponibile = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Camere", x => x.CameraId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clienti",
+                columns: table => new
+                {
+                    ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cognome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clienti", x => x.ClienteId);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,6 +192,63 @@ namespace Progetto_BE_S6.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Prenotazioni",
+                columns: table => new
+                {
+                    PrenotazioneId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CameraId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DataInizio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataFine = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Stato = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prenotazioni", x => x.PrenotazioneId);
+                    table.ForeignKey(
+                        name: "FK_Prenotazioni_Camere_CameraId",
+                        column: x => x.CameraId,
+                        principalTable: "Camere",
+                        principalColumn: "CameraId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Prenotazioni_Clienti_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Clienti",
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "DB5AE2D5-1966-4885-82BF-05FB79EEDDF5", "DB5AE2D5-1966-4885-82BF-05FB79EEDDF5", "Dipendente", "DIPENDENTE" },
+                    { "E47D581A-E477-40DA-AC5D-276F07F59142", "E47D581A-E477-40DA-AC5D-276F07F59142", "Admin", "ADMIN" },
+                    { "EB589A41-5B71-41E7-A754-81764E7CCA23", "EB589A41-5B71-41E7-A754-81764E7CCA23", "Supervisor", "SUPERVISOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Camere",
+                columns: new[] { "CameraId", "IsDisponibile", "Numero", "Prezzo", "Tipo" },
+                values: new object[,]
+                {
+                    { new Guid("08539e4a-cba7-4bf0-9491-bc6e4faeca7d"), true, "103", 110.00m, "Tripla" },
+                    { new Guid("228b555e-eefe-4133-8650-0fcba06cd0af"), true, "101", 70.00m, "Singola" },
+                    { new Guid("2a8b7bc6-ecfa-4a9b-b19a-6c0fa4760211"), true, "102", 90.00m, "Doppia" },
+                    { new Guid("461448da-0c92-42b1-a289-808168099120"), true, "110", 90.00m, "Doppia" },
+                    { new Guid("59e5ae23-7b1e-4a84-856e-1e4089b39c5c"), true, "104", 150.00m, "Quadrupla" },
+                    { new Guid("8787bdaa-06f9-4384-a0e5-29330dc94b71"), true, "109", 70.00m, "Singola" },
+                    { new Guid("aceb24f8-6d8f-4a0f-a705-fe908fa28996"), true, "106", 90.00m, "Doppia" },
+                    { new Guid("b8505eb9-ec33-4a8f-a988-ad001779d748"), true, "105", 70.00m, "Singola" },
+                    { new Guid("c3a9241b-87b3-4e13-a7bc-b47c8412b888"), true, "107", 110.00m, "Tripla" },
+                    { new Guid("cd32c9d3-411c-4d46-84f7-186fc20bb025"), true, "108", 150.00m, "Quadrupla" },
+                    { new Guid("f675b115-0636-4b63-9c84-83c8637ac40a"), true, "111", 110.00m, "Tripla" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -198,6 +287,16 @@ namespace Progetto_BE_S6.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prenotazioni_CameraId",
+                table: "Prenotazioni",
+                column: "CameraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prenotazioni_ClienteId",
+                table: "Prenotazioni",
+                column: "ClienteId");
         }
 
         /// <inheritdoc />
@@ -219,10 +318,19 @@ namespace Progetto_BE_S6.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Prenotazioni");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Camere");
+
+            migrationBuilder.DropTable(
+                name: "Clienti");
         }
     }
 }

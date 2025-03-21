@@ -52,6 +52,8 @@ builder.Services.AddFluentEmail(builder.Configuration.GetSection("MailSettings")
 builder.Services.AddScoped<UserManager<ApplicationUser>>();
 builder.Services.AddScoped<SignInManager<ApplicationUser>>();
 builder.Services.AddScoped<RoleManager<ApplicationRole>>();
+
+builder.Services.AddScoped<PrenotazioneServices>();
 builder.Services.AddScoped<EmailServices>();
 
 
