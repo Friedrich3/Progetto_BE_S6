@@ -1,0 +1,61 @@
+﻿@model RegisterDipendenteViewModel
+@{
+    ViewData["Title"] = "Registro Dipendente";
+}
+
+
+<div class="container">
+    <div class="row">
+        <h3 class="text-center">Modulo Registrazione Nuovo Dipendente</h3>
+    </div>
+	<div class="row">
+		<div class=" col-4"></div>
+		<div class=" col-4 mt-5 border border-2  shadow-lg">
+			<form class="row g-3 py-3" method="post" asp-controller="Account" asp-action="Register">
+
+				<div class="col-6">
+					<label for="Nome" class="form-label fw-bold text-secondary">Nome</label>
+					<input type="text" class="form-control" id="Nome" placeholder="inserisci il nome..." asp-for="FirstName" required>
+				</div>
+				<div class="col-6">
+					<label for="Cognome" class="form-label fw-bold text-secondary">Cognome</label>
+					<input type="text" class="form-control" id="Cognome" placeholder="inserisci il cognome..." asp-for="LastName" required>
+				</div>
+				<div class="col-md-12">
+					<label for="inputEmail" class="form-label fw-bold text-secondary">Email</label>
+					<input type="email" class="form-control" id="inputEmail" asp-for="Email" placeholder="nome.cognome@hotel.it" required>
+				</div>
+				<br />
+				<div class="col-md-8">
+					<label for="birthdate" class="form-label fw-bold text-secondary">Data di Nascita</label>
+					<input type="date" class="form-control" id="birthdate" asp-for="BirthDate" required>
+				</div>
+				<div class ="col-md-8">
+					<label for="ruoli" class="form-label fw-bold text-secondary">Ruolo</label>
+					<select class="form-select" id="ruoli" asp-for="Role" required>
+						<option selected>Seleziona un ruolo</option>
+						@if(ViewBag.Ruoli != null){
+							foreach(var role in ViewBag.Ruoli){
+								<option value="@role">@role</option>
+							}
+						}
+					</select>
+				</div>
+				<div class="col-md-12">
+					<label for="inputPassword4" class="form-label fw-bold text-secondary">Password</label>
+					<input type="password" class="form-control" id="inputPassword4" asp-for="Password" required>
+					<small class="text-secondary">*la password deve contentere almeno un carattere minuscolo</small>
+				</div>
+				<div class="col-md-12">
+					<label for="confermaPassword" class="form-label fw-bold text-secondary">Conferma Password</label>
+					<input type="password" class="form-control" id="confermaPassword" asp-for="ConfermaPassword" required>
+					<small class="text-secondary">*la password deve corrispondere con quella inserita sopra</small>
+				</div>
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-primary">Registra</button>
+				</div>
+			</form>
+		</div>
+		<div class=" col-4"></div>
+	</div>
+</div>

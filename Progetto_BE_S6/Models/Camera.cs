@@ -9,9 +9,9 @@ namespace Progetto_BE_S6.Models
         public Guid CameraId { get; set; }
 
         [Required]
-        public required int Numero { get; set; }
+        public required string Numero { get; set; }
         [Required]
-        [AllowedValues("singola", "doppia", "tripla", "quadrupla")]
+        [AllowedValues("Singola", "Doppia", "Tripla", "Quadrupla")]
         public required string Tipo { get; set; }
 
         [Required]

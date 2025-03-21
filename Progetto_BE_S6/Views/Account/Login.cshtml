@@ -1,0 +1,26 @@
+﻿@model LoginViewModel
+<div class="container">
+	<div class="row">
+		<h3 class="text-center">Login</h3>
+	</div>
+	<div class="row">
+		<div class=" col-4"></div>
+		<div class=" col-4 mt-5 border border-2  shadow-lg">
+			<form class="row g-3 py-3" method="post" asp-controller="Account" asp-action="Register">
+				<div class="col-md-12">
+					<label for="inputEmail" class="form-label fw-bold text-secondary">Email</label>
+					<input type="email" class="form-control" id="inputEmail" asp-for="Email" placeholder="mario.rossi@email.it" required>
+				</div>
+				<div class="col-md-12">
+					<label for="inputPassword4" class="form-label fw-bold text-secondary">Password</label>
+					<input type="password" class="form-control" id="inputPassword4" asp-for="Password" required>
+				</div>
+				
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-primary">Login!</button>
+				</div>
+			</form>
+		</div>
+		<div class=" col-4"></div>
+	</div>
+</div> 

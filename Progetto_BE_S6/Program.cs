@@ -17,7 +17,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequiredLength = 8;                //lunghezza minima password
-    options.Password.RequireDigit = true;              // psw richiede almeno un numero	
+    options.Password.RequireDigit = false;              // psw richiede almeno un numero	
     options.Password.RequireLowercase = true;			//psw almeno una lettera minuscola
     options.Password.RequireUppercase = false;          //psw almeno una lettera Maiuscola
     options.Password.RequireNonAlphanumeric = false;

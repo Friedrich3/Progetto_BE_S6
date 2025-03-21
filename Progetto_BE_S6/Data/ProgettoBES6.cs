@@ -29,6 +29,21 @@ namespace Progetto_BE_S6.Data
             modelBuilder.Entity<Prenotazione>().HasOne(cl=> cl.Cliente).WithMany(p=> p.Prenotazione).HasForeignKey(fk=> fk.ClienteId);
             modelBuilder.Entity<Prenotazione>().HasOne(ca => ca.Camera).WithMany(p=> p.Prenotazione).HasForeignKey(fk=> fk.CameraId);
 
+
+            modelBuilder.Entity<Camera>().HasData(
+                new Camera { CameraId = Guid.NewGuid(), Numero = "101", Tipo = "Singola", Prezzo = 70.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "102", Tipo = "Doppia", Prezzo = 90.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "103", Tipo = "Tripla", Prezzo = 110.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "104", Tipo = "Quadrupla", Prezzo = 150.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "105", Tipo = "Singola", Prezzo = 70.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "106", Tipo = "Doppia", Prezzo = 90.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "107", Tipo = "Tripla", Prezzo = 110.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "108", Tipo = "Quadrupla", Prezzo = 150.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "109", Tipo = "Singola", Prezzo = 70.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "110", Tipo = "Doppia", Prezzo = 90.00m, IsDisponibile = true },
+                new Camera { CameraId = Guid.NewGuid(), Numero = "111", Tipo = "Tripla", Prezzo = 110.00m, IsDisponibile = true }
+                );
+
         }
     }
 }
