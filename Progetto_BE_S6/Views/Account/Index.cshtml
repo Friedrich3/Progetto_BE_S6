@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿ @using System.Security.Claims;
 @{
+	ViewData["Title"] = "Pagina Dipendente";
 }
+
+
+<div class="container">
+	<div class="row">
+		<h2>Benvenuto @User.FindFirst(ClaimTypes.GivenName).Value</h2>
+	</div>
+	@if (User.IsInRole("Admin"))
+	{
+		<div class="row">
+			<div class="card">
+				<div class="card-header">
+					Admin Privilege-only
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">Inserimento nuovo Dipendente</h5>
+					<p class="card-text">in questa sezione potrai creare ed aggiungere un nuovo dipendente</p>
+					<a asp-action="Register" asp-controller="Account" class="btn btn-primary">Vai alla Registrazione</a>
+				</div>
+			</div>
+
+		</div>
+	}
+</div>

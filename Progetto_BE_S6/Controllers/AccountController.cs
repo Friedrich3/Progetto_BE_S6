@@ -21,21 +21,24 @@ namespace Progetto_BE_S6.Controllers
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
         {
-            _userManager = userManager;             
+            _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
 
+        
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Register()
         {
             ViewBag.Ruoli = await _roleManager.Roles.ToListAsync();
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDipendenteViewModel dipendentViewModel)
         {
@@ -124,6 +127,12 @@ namespace Progetto_BE_S6.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
+        public IActionResult Denied()
+        {
+            return View();
         }
 
         }
