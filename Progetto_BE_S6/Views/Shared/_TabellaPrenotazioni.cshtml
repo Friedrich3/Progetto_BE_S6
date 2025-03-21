@@ -1,0 +1,51 @@
+﻿@model List<Prenotazione>
+
+
+@if (Model != null && Model.Count > 0)
+{
+
+<table id="tabellaPrenotazioni" class="table table-striped" >
+    <thead>
+        <tr>
+                <th>Numero Stanza</th>
+                <th>Tipo</th>
+                <th>Cliente</th>
+                <th>Data Check-In</th>
+                <th>Data Check-Out</th>
+                <th>Created by</th>
+                <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Camera.Numero</td>
+                <td>@item.Camera.Tipo</td>
+                <td>@item.Cliente.Email</td>
+                <td>@item.DataInizio</td>
+                <td>@item.DataFine</td>
+                <td>@item.CreatedBy</td>
+                <td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Supervisor"))
+                    {
+                                <div>
+                                    <button class="btn btn-warning fw-bold" onclick="showEditModal('@item.PrenotazioneId')">Edit</button>
+                                    <button class="btn btn-danger fw-bold" onclick="showDeleteModal('@item.PrenotazioneId')">Delete</button>
+                                </div>
+                    }
+                </td>
+            </tr>
+
+        }
+
+
+    </tbody>
+</table>
+}
+else{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Non ci sono prenotazioni attive per le stanze
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}

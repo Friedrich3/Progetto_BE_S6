@@ -32,14 +32,16 @@ namespace Progetto_BE_S6.Controllers
             return View();
         }
 
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register()
         {
             ViewBag.Ruoli = await _roleManager.Roles.ToListAsync();
             return View();
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterDipendenteViewModel dipendentViewModel)
         {
             if (!ModelState.IsValid) 

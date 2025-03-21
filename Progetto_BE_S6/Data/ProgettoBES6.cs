@@ -48,7 +48,8 @@ namespace Progetto_BE_S6.Data
                 new Camera { CameraId = Guid.NewGuid(), Numero = "110", Tipo = "Doppia", Prezzo = 90.00m, IsDisponibile = true },
                 new Camera { CameraId = Guid.NewGuid(), Numero = "111", Tipo = "Tripla", Prezzo = 110.00m, IsDisponibile = true }
                 );
-            
+
+            modelBuilder.Entity<Cliente>().HasIndex(p => p.Email).IsUnique();
             
 
         }

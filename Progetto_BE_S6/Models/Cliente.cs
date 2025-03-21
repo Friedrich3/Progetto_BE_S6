@@ -17,10 +17,13 @@ namespace Progetto_BE_S6.Models
 
         [Required]
         [EmailAddress]
+        
         public required string Email { get; set; }
 
         [Required]
-        public required int Telefono {  get; set; }
+        [StringLength(15, MinimumLength = 6)]
+        [RegularExpression(@"^\+?\d{6,15}$")]
+        public required string Telefono {  get; set; }
         
 
         public ICollection<Prenotazione> Prenotazione { get; set; }
